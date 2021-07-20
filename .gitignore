@@ -1,0 +1,4 @@
+main
+dist/*
+docs-rendered/*
+packer-plugin-bolt

@@ -1,0 +1,66 @@
+---
+description: |
+  The bolt Packer provisioner allows Bolt tasks and plans to be run to provision
+  the machine.
+page_title: Bolt - Provisioners
+nav_title: Bolt
+---
+
+# Bolt Provisioner
+
+Type: `bolt`
+
+The `bolt` Packer provisioner runs Bolt tasks and plans. It dynamically creates
+an Bolt inventory file configured to use SSH, runs an SSH server, executes
+`bolt task run` or `bolt plan run`, and marshals Bolt tasks and plans through the SSH server to the
+machine being provisioned by Packer.
+
+## Basic Example
+
+Example Packer template:
+
+<Tabs>
+<Tab heading="HCL2">
+
+```hcl
+source "digitalocean" "example"{
+    api_token = "6a561151587389c7cf8faa2d83e94150a4202da0e2bad34dd2bf236018ffaeeb"
+    image     = "ubuntu-20-04-x64"
+    region    = "sfo1"
+}
+
+build {
+    sources = [
+        "source.digitalocean.example"
+    ]
+
+    provisioner "bolt" {
+      bolt_task = ""
+    }
+}
+```
+
+</Tab>
+<Tab heading="JSON">
+
+```json
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "api_token": "6a561151587389c7cf8faa2d83e94150a4202da0e2bad34dd2bf236018ffaeeb",
+      "image": "ubuntu-20-04-x64",
+      "region": "sfo1"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "bolt",
+      "bolt_plan": ""
+    }
+  ]
+}
+```
+
+</Tab>
+</Tabs>
